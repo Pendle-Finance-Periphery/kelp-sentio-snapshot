@@ -1,11 +1,12 @@
+## Introduction
+
+This sentio indexer aims to take a snapshot of Pendle users before a specific timestamp everyday. 
+For timestamp configuration, it can be done in `./src/consts.ts`.
+
 ## Usage
 
-User snapshot for the configured frequency is recorded `Event Log` tab of Sentio project, which can be fetched/viewed in `Data Studio` with a simple SQL query. 
-
-An easy way to do get the latest result of user snapshot is to use this query:
+Users' data at a specific block (statisfying the configuration) can be fetched/viewed in `Data Studio` with a simple SQL query. 
 
 ```sql
-select user, share,  block_number  from `UserDailyShare` where  block_number = (select max( block_number ) from `UserDailyShare`)
+select user, share,  block_number  from `UserDailyShare` where  block_number = <BLOCK_NUMBER>
 ```
-
-Please note that Sentio processor might be unstable, causing delay in data processing. It's necessary to check if the latest blocknumber fits your expectation.
