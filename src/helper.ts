@@ -43,25 +43,23 @@ export async function getTargetedBlock(ctx: EthContext, targetedTimestamp: numbe
     let curTimestamp = getUnixTimestamp(ctx.timestamp);
     let curBlockNumber = Number(ctx.blockNumber);
 
-    while (true) {
-        if (curTimestamp < targetedTimestamp) {
-            let nextBlock = (await provider.getBlock(curBlockNumber + 1))!;
-            const nextTimestamp = nextBlock.timestamp;
-            if (nextTimestamp >= targetedTimestamp) {
-                return curBlockNumber;
-            }
-        }
-
-        
-        const diff = Math.abs(targetedTimestamp - curTimestamp);
-        const diffInBlock = Math.ceil(diff / MISC_CONSTS.AVERAGE_SECOND_PER_BLOCK) * (targetedTimestamp < curTimestamp ? -1 : 1);
-
-        let projectedBlockNumber = curBlockNumber + diffInBlock;
-        const projectedBlock = (await provider.getBlock(projectedBlockNumber))!;
-        const projectedTimestamp = Number(projectedBlock.timestamp);
-        curTimestamp = projectedTimestamp;
-        curBlockNumber = projectedBlockNumber;
+    if (curTimestamp < targetedTimestamp) {
+        throw new Error("Current timestamp is less than targeted timestamp");
     }
+    let l = curBlockNumber - Math.floor((curTimestamp - targetedTimestamp) / MISC_CONSTS.AVERAGE_SECOND_PER_BLOCK) * 2;
+    let r = curBlockNumber;
+    let ans = l;
 
-    return curBlockNumber;
+    while (l < r) {
+        let mid = Math.floor((l + r) / 2);
+        let block = (await provider.getBlock(mid))!;
+
+        if (Number(block.timestamp) < targetedTimestamp) {
+            l = mid + 1;
+            ans = mid;
+        } else {
+            r = mid - 1;
+        }
+    }
+    return ans;
 }

@@ -8,40 +8,42 @@ export const MISC_CONSTS = {
     ONE_DAY_IN_SECONDS: 60 * 60 * 24,
     ONE_HOUR_IN_SECONDS: 60 * 60,
     ZERO_ADDRESS: "0x0000000000000000000000000000000000000000",
-    AVERAGE_SECOND_PER_BLOCK: 12,
     MULTICALL: "0xca11bde05977b3631167028862be2a173976ca11",
-}
-
-export const CONFIG = {
-    BLOCKCHAIN: EthChainId.ETHEREUM,
-    SNAPSHOT_FREQUENCY: 24 * 60, // 1 day in minute
-    TARGETED_TIMESTAMP: 27360,
     MULTICALL_BATCH: 250,
 }
 
+export const CONFIG = {
+    BLOCKCHAIN: EthChainId.ARBITRUM,
+    SNAPSHOT_FREQUENCY: 24 * 60, // 1 day in minute
+    TARGETED_TIMESTAMP: 27360,
+    MULTICALL_BATCH: 250,
+    AVERAGE_SECOND_PER_BLOCK: 0.2, // It doesn't hurt to make the steps shorter (avg currently is 0.254)
+}
+
 export const PENDLE_POOL_ADDRESSES = {
-    SY: "0x730a5e2acebccaa5e9095723b3cb862739da793c",
-    YT: "0x0ed3a1d45dfdcf85bcc6c7bafdc0170a357b974c",
-    LP: "0x4f43c77872db6ba177c270986cd30c3381af37ee",
-    START_BLOCK: 19059129,
-    TREASURY: "0x8270400d528c34e1596ef367eedec99080a1b592",
-    EQB_STAKING: "0xaab4b380b88f4a08acf8d8f74183a717b552fd6c",
-    PENPIE_RECEIPT_TOKEN: "0x12ed306b2b46272157434fb17e2e721d65d9fbb3",
-    STAKEDAO_RECEIPT_TOKEN: "0xbbfe1d391b80c759073711520b3aaca796437585",
+    SY: "0xf176fb51f4eb826136a54fdc71c50fcd2202e272",
+    YT: "0xda53c73a28dff704fe757b8b4f6f6359707533da",
+    LP: "0x6ae79089b2cf4be441480801bb741a531d94312b",
+    START_BLOCK: 197160721,
+    TREASURY: "0xcbcb48e22622a3778b6f14c2f5d258ba026b05e6",
+    EQB_STAKING: "0x8181c89fe053b344b95e03014cee39a30e07a6b2",
+    PENPIE_RECEIPT_TOKEN: "0xe3b327c43b5002eb7280eef52823698b6cda06cf",
+    // STAKEDAO_RECEIPT_TOKEN: "0xbbfe1d391b80c759073711520b3aaca796437585",
+    MULTICALL: "0xca11bde05977b3631167028862be2a173976ca11",
     LIQUID_LOCKERS: [
         {
             // Penpie
-            address: "0x6e799758cee75dae3d84e09d40dc416ecf713652",
-            receiptToken: "0x12ed306b2b46272157434fb17e2e721d65d9fbb3",
+            address: "0x6db96bbeb081d2a85e0954c252f2c1dc108b3f81",
+            receiptToken: "0xe3b327c43b5002eb7280eef52823698b6cda06cf",
         },
         {
             // EQB
             address: '0x64627901dadb46ed7f275fd4fc87d086cff1e6e3',
-            receiptToken: "0xaab4b380b88f4a08acf8d8f74183a717b552fd6c",
+            receiptToken: "0x8181c89fe053b344b95e03014cee39a30e07a6b2",
         },
-        {   // STAKEDAO
-            address: '0xd8fa8dc5adec503acc5e026a98f32ca5c1fa289a',
-            receiptToken: '0xbbfe1d391b80c759073711520b3aaca796437585',
-        }
+        // {   // STAKEDAO
+        //     address: '0xd8fa8dc5adec503acc5e026a98f32ca5c1fa289a',
+        //     receiptToken: '0xbbfe1d391b80c759073711520b3aaca796437585',
+        // }
     ]
 }

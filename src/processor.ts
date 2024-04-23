@@ -73,7 +73,6 @@ PendleMarketProcessor.bind({
   if (targetedBlock < PENDLE_POOL_ADDRESSES.START_BLOCK) {
     return;
   }
-
   await takeGlobalSnapshot(ctx, targetedBlock, targetedTimestamp);
 }, 60, 60); // one day
 
@@ -97,12 +96,12 @@ ERC20Processor.bind({
 });
 
 
-ERC20Processor.bind({
-  address: PENDLE_POOL_ADDRESSES.STAKEDAO_RECEIPT_TOKEN,
-  startBlock: PENDLE_POOL_ADDRESSES.START_BLOCK,
-  name: "Stakedao Receipt Token",
-  network: CONFIG.BLOCKCHAIN
-}).onEventTransfer(async (evt, ctx) => {
-  await addLpUsers(evt.args.from);
-  await addLpUsers(evt.args.to);
-});
+// ERC20Processor.bind({
+//   address: PENDLE_POOL_ADDRESSES.STAKEDAO_RECEIPT_TOKEN,
+//   startBlock: PENDLE_POOL_ADDRESSES.START_BLOCK,
+//   name: "Stakedao Receipt Token",
+//   network: CONFIG.BLOCKCHAIN
+// }).onEventTransfer(async (evt, ctx) => {
+//   await addLpUsers(evt.args.from);
+//   await addLpUsers(evt.args.to);
+// });
