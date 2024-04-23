@@ -9,7 +9,7 @@ export const MISC_CONSTS = {
     ONE_HOUR_IN_SECONDS: 60 * 60,
     ZERO_ADDRESS: "0x0000000000000000000000000000000000000000",
     MULTICALL: "0xca11bde05977b3631167028862be2a173976ca11",
-    AVERAGE_SECOND_PER_BLOCK: 0.35, // It doesn't hurt to make the steps shorter (avg currently is 0.254)
+    MULTICALL_BATCH: 250,
 }
 
 export const CONFIG = {
@@ -17,6 +17,7 @@ export const CONFIG = {
     SNAPSHOT_FREQUENCY: 24 * 60, // 1 day in minute
     TARGETED_TIMESTAMP: 27360,
     MULTICALL_BATCH: 250,
+    AVERAGE_SECOND_PER_BLOCK: 0.2, // It doesn't hurt to make the steps shorter (avg currently is 0.254)
 }
 
 export const PENDLE_POOL_ADDRESSES = {
