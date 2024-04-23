@@ -1,6 +1,6 @@
 import { EthContext } from "@sentio/sdk/eth";
 import { getMulticallContractOnContext, Multicall2 } from "./types/eth/multicall.js";
-import { MISC_CONSTS, PENDLE_POOL_ADDRESSES } from "./consts.js";
+import { CONFIG, MISC_CONSTS, PENDLE_POOL_ADDRESSES } from "./consts.js";
 import { getERC20ContractOnContext } from "@sentio/sdk/eth/builtin/erc20";
 import { getPendleMarketContractOnContext } from "./types/eth/pendlemarket.js";
 import { getPendleYieldTokenContractOnContext } from "./types/eth/pendleyieldtoken.js";
@@ -12,7 +12,7 @@ export async function readAllUserActiveBalances(
 ): Promise<bigint[]> {
     const multicall = getMulticallContractOnContext(
         ctx,
-        PENDLE_POOL_ADDRESSES.MULTICALL
+        MISC_CONSTS.MULTICALL
     );
     const market = getPendleMarketContractOnContext(
         ctx,
@@ -20,8 +20,8 @@ export async function readAllUserActiveBalances(
     );
 
     const allCalls: Promise<Multicall2.ResultStructOutput[]>[] = [];
-    for (let i = 0; i < allAddresses.length; i += MISC_CONSTS.MULTICALL_BATCH) {
-        const batch = allAddresses.slice(i, i + MISC_CONSTS.MULTICALL_BATCH);
+    for (let i = 0; i < allAddresses.length; i += CONFIG.MULTICALL_BATCH) {
+        const batch = allAddresses.slice(i, i + CONFIG.MULTICALL_BATCH);
         const calls = batch.map((address) => {
             return {
                 target: market.address,
@@ -48,12 +48,12 @@ export async function readAllUserERC20Balances(
 ): Promise<bigint[]> {
     const multicall = getMulticallContractOnContext(
         ctx,
-        PENDLE_POOL_ADDRESSES.MULTICALL
+        MISC_CONSTS.MULTICALL
     );
     const erc20 = getERC20ContractOnContext(ctx, tokenAddress);
     const allCalls: Promise<Multicall2.ResultStructOutput[]>[] = [];
-    for (let i = 0; i < allAddresses.length; i += MISC_CONSTS.MULTICALL_BATCH) {
-        const batch = allAddresses.slice(i, i + MISC_CONSTS.MULTICALL_BATCH);
+    for (let i = 0; i < allAddresses.length; i += CONFIG.MULTICALL_BATCH) {
+        const batch = allAddresses.slice(i, i + CONFIG.MULTICALL_BATCH);
         const calls = batch.map((address) => {
             return {
                 target: erc20.address,
@@ -77,12 +77,12 @@ export async function readAllYTPositions(ctx: EthContext, allUserAddresses: stri
 
     const multicall = getMulticallContractOnContext(
         ctx,
-        PENDLE_POOL_ADDRESSES.MULTICALL
+        MISC_CONSTS.MULTICALL
     );
     const yt = getPendleYieldTokenContractOnContext(ctx, PENDLE_POOL_ADDRESSES.YT);
     const allCalls: Promise<Multicall2.ResultStructOutput[]>[] = [];
-    for (let i = 0; i < allUserAddresses.length; i += MISC_CONSTS.MULTICALL_BATCH) {
-        const batch = allUserAddresses.slice(i, i + MISC_CONSTS.MULTICALL_BATCH);
+    for (let i = 0; i < allUserAddresses.length; i += CONFIG.MULTICALL_BATCH) {
+        const batch = allUserAddresses.slice(i, i + CONFIG.MULTICALL_BATCH);
         const calls = batch.map((address) => {
             return {
                 target: yt.address,

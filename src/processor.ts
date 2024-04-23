@@ -64,14 +64,18 @@ PendleMarketProcessor.bind({
   await handleLPTransfer(evt, ctx);
 }).onTimeInterval(async (blk, ctx) => {
   const timestamp = getUnixTimestamp(ctx.timestamp);
-  const targetedTimestamp = getTargetedTimestamp(timestamp);
+  const targetedTimestamp = getTargetedTimestamp(timestamp);  
+  if (timestamp - targetedTimestamp > MISC_CONSTS.ONE_HOUR_IN_SECONDS) {
+    return;
+  }
+  
   const targetedBlock = await getTargetedBlock(ctx, targetedTimestamp);
   if (targetedBlock < PENDLE_POOL_ADDRESSES.START_BLOCK) {
     return;
   }
 
   await takeGlobalSnapshot(ctx, targetedBlock, targetedTimestamp);
-}, 60 * 24, 60 * 24); // one day
+}, 60, 60); // one day
 
 EQBBaseRewardProcessor.bind({
   address: PENDLE_POOL_ADDRESSES.EQB_STAKING,

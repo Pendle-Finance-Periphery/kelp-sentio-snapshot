@@ -1,5 +1,5 @@
 import { EthContext, getProvider } from "@sentio/sdk/eth";
-import { MISC_CONSTS, PENDLE_POOL_ADDRESSES } from "./consts.js";
+import { CONFIG, MISC_CONSTS, PENDLE_POOL_ADDRESSES } from "./consts.js";
 
 export type ShareMapping = Record<string, bigint>;
 
@@ -31,7 +31,7 @@ export function getSumShareMapping(...shareMappings: ShareMapping[]): ShareMappi
 }
 
 export function getTargetedTimestamp(timestamp: number) {
-    let targetedTimestamp = (timestamp - timestamp % MISC_CONSTS.ONE_DAY_IN_SECONDS + MISC_CONSTS.TARGETED_TIMESTAMP);
+    let targetedTimestamp = (timestamp - timestamp % MISC_CONSTS.ONE_DAY_IN_SECONDS + CONFIG.TARGETED_TIMESTAMP);
     if (targetedTimestamp > timestamp) {
         targetedTimestamp -= MISC_CONSTS.ONE_DAY_IN_SECONDS;
     }
