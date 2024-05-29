@@ -7,7 +7,7 @@ import {
 import { EthContext } from "@sentio/sdk/eth";
 import { readAllUserActiveBalances, readAllUserERC20Balances } from "../multicall.js";
 import { PENDLE_POOL_ADDRESSES } from "../consts.js";
-import { getUnixTimestamp, isLiquidLockerAddress, ShareMapping } from "../helper.js";
+import { getUnixTimestamp, isLiquidLockerAddress, isSentioInternalError, ShareMapping } from "../helper.js";
 
 const db = new AsyncNedb({
   filename: "/data/pendle-accounts-lp.db",
@@ -74,7 +74,11 @@ export async function takeLPSnapshot(ctx: EthContext, blockNumber: number): Prom
           (userBal * liquidLockerActiveBal) / liquidLockerBal;
         allUserShares[i] += userBoostedHolding;
       }
-    } catch (err) { }
+    } catch (err) { 
+      if (isSentioInternalError(err)) {
+        throw err;
+      }
+    }
   }
 
   const result: ShareMapping = {};

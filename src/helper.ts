@@ -1,7 +1,22 @@
 import { EthContext, getProvider } from "@sentio/sdk/eth";
 import { CONFIG, MISC_CONSTS, PENDLE_POOL_ADDRESSES } from "./consts.js";
+import os from 'os';
 
 export type ShareMapping = Record<string, bigint>;
+
+export function isSentioInternalError(err: any): boolean {
+    if (
+      err.code === os.constants.errno.ECONNRESET ||
+      err.code === os.constants.errno.ECONNREFUSED ||
+      err.code === os.constants.errno.ECONNABORTED ||
+      err.toString().includes('ECONNREFUSED') ||
+      err.toString().includes('ECONNRESET') ||
+      err.toString().includes('ECONNABORTED')
+    ) {
+      return true;
+    }
+    return false;
+  }
 
 export function isPendleAddress(addr: string) {
     addr = addr.toLowerCase();

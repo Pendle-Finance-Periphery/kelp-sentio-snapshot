@@ -20,30 +20,30 @@ export const CONFIG = {
 }
 
 export const PENDLE_POOL_ADDRESSES = {
-    SY: '0x34349c5569e7b846c3558961552d2202760a9789',
-    YT: '0x029aad400f6092dc735a65be95102efcc2fe64bf',
-    LP: '0x445d25a1c31445fb29e65d12da8e0eea38174176',
+    SY: '0x730a5e2acebccaa5e9095723b3cb862739da793c',
+    YT: '0xe653e4048620e546afff02d3689678896d22e236',
+    LP: '0x6b4740722e46048874d84306b2877600abcea3ae',
     MULTICALL: '0xca11bde05977b3631167028862be2a173976ca11',
     START_BLOCK: 19516902,
     TREASURY: '0x8270400d528c34e1596ef367eedec99080a1b592',
-    EQB_STAKING: '0xe0402eab6019013e6ba5386559f9ca27735f83c1',
-    PENPIE_RECEIPT_TOKEN: '0x2053e178a70daa28a40d09563d99aa6abdc82130',
-    // STAKEDAO_RECEIPT_TOKEN: "0xdd9df6a77b4a4a07875f55ce5cb6b933e52cb30a",
+    EQB_STAKING: '0xde3e70bf3ebe177399edd3b0c156141ff24643e1',
+    PENPIE_RECEIPT_TOKEN: '0x4120ae0cc32eebf5e201be79390fbb063275987b',
+    STAKEDAO_RECEIPT_TOKEN: '0x396725b23e59d43588c8077ae4cc3cd31d51b7fb',
     LIQUID_LOCKERS: [
       {
         // Penpie
         address: '0x6e799758cee75dae3d84e09d40dc416ecf713652',
-        receiptToken: '0x2053e178a70daa28a40d09563d99aa6abdc82130',
+        receiptToken: '0x4120ae0cc32eebf5e201be79390fbb063275987b',
       },
       {
         // EQB
         address: '0x64627901dadb46ed7f275fd4fc87d086cff1e6e3',
-        receiptToken: '0xe0402eab6019013e6ba5386559f9ca27735f83c1',
+        receiptToken: '0xde3e70bf3ebe177399edd3b0c156141ff24643e1',
       },
-      // {   // STAKEDAO
-      //     address: '0xd8fa8dc5adec503acc5e026a98f32ca5c1fa289a',
-      //     receiptToken: '0xdd9df6a77b4a4a07875f55ce5cb6b933e52cb30a',
-      // }
+      {   // STAKEDAO
+          address: '0xd8fa8dc5adec503acc5e026a98f32ca5c1fa289a',
+          receiptToken: '0x396725b23e59d43588c8077ae4cc3cd31d51b7fb',
+      }
     ],
   };
   
