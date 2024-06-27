@@ -20,28 +20,30 @@ export const CONFIG = {
 }
 
 export const PENDLE_POOL_ADDRESSES = {
-    SY: "0x730a5e2acebccaa5e9095723b3cb862739da793c",
-    YT: "0x0ed3a1d45dfdcf85bcc6c7bafdc0170a357b974c",
-    LP: "0x4f43c77872db6ba177c270986cd30c3381af37ee",
-    START_BLOCK: 19059129,
-    TREASURY: "0x8270400d528c34e1596ef367eedec99080a1b592",
-    EQB_STAKING: "0xaab4b380b88f4a08acf8d8f74183a717b552fd6c",
-    PENPIE_RECEIPT_TOKEN: "0x12ed306b2b46272157434fb17e2e721d65d9fbb3",
-    STAKEDAO_RECEIPT_TOKEN: "0xbbfe1d391b80c759073711520b3aaca796437585",
+    SY: '0xd7df7e085214743530aff339afc420c7c720bfa7',
+    YT: '0x323da63d354c9d79df927fd21ce5b97add3a50d9',
+    LP: '0x6c269dfc142259c52773430b3c78503cc994a93e',
+    MULTICALL: '0xca11bde05977b3631167028862be2a173976ca11',
+    START_BLOCK: 20158640,
+    TREASURY: '0x8270400d528c34e1596ef367eedec99080a1b592',
+    EQB_STAKING: '0x518ba876c34c688dd7a3d161602973a7705bbff2',
+    PENPIE_RECEIPT_TOKEN: '0x5ed63a582533ad98bf15bc8669607eea5a61398b',
+    STAKEDAO_RECEIPT_TOKEN: '0x396725b23e59d43588c8077ae4cc3cd31d51b7fb',
     LIQUID_LOCKERS: [
-        {
-            // Penpie
-            address: "0x6e799758cee75dae3d84e09d40dc416ecf713652",
-            receiptToken: "0x12ed306b2b46272157434fb17e2e721d65d9fbb3",
-        },
-        {
-            // EQB
-            address: '0x64627901dadb46ed7f275fd4fc87d086cff1e6e3',
-            receiptToken: "0xaab4b380b88f4a08acf8d8f74183a717b552fd6c",
-        },
-        {   // STAKEDAO
-            address: '0xd8fa8dc5adec503acc5e026a98f32ca5c1fa289a',
-            receiptToken: '0xbbfe1d391b80c759073711520b3aaca796437585',
-        }
-    ]
-}
+      {
+        // Penpie
+        address: '0x6e799758cee75dae3d84e09d40dc416ecf713652',
+        receiptToken: '0x5ed63a582533ad98bf15bc8669607eea5a61398b',
+      },
+      {
+        // EQB
+        address: '0x64627901dadb46ed7f275fd4fc87d086cff1e6e3',
+        receiptToken: '0x518ba876c34c688dd7a3d161602973a7705bbff2',
+      },
+      // {   // STAKEDAO
+      //     address: '0xd8fa8dc5adec503acc5e026a98f32ca5c1fa289a',
+      //     receiptToken: '0x396725b23e59d43588c8077ae4cc3cd31d51b7fb',
+      // }
+    ],
+  };
+  
