@@ -1,7 +1,22 @@
 import { EthContext, getProvider } from "@sentio/sdk/eth";
 import { CONFIG, MISC_CONSTS, PENDLE_POOL_ADDRESSES } from "./consts.js";
+import os from 'os';
 
 export type ShareMapping = Record<string, bigint>;
+
+export function isSentioInternalError(err: any): boolean {
+    if (
+      err.code === os.constants.errno.ECONNRESET ||
+      err.code === os.constants.errno.ECONNREFUSED ||
+      err.code === os.constants.errno.ECONNABORTED ||
+      err.toString().includes('ECONNREFUSED') ||
+      err.toString().includes('ECONNRESET') ||
+      err.toString().includes('ECONNABORTED')
+    ) {
+      return true;
+    }
+    return false;
+  }
 
 export function isPendleAddress(addr: string) {
     addr = addr.toLowerCase();
@@ -43,7 +58,9 @@ export async function getTargetedBlock(ctx: EthContext, targetedTimestamp: numbe
     let curTimestamp = getUnixTimestamp(ctx.timestamp);
     let curBlockNumber = Number(ctx.blockNumber);
 
-    while (true) {
+    let l = -1, r = -1;
+
+    for(let i = 0; i < 20; ++i) {
         if (curTimestamp < targetedTimestamp) {
             let nextBlock = (await provider.getBlock(curBlockNumber + 1))!;
             const nextTimestamp = nextBlock.timestamp;
@@ -59,8 +76,32 @@ export async function getTargetedBlock(ctx: EthContext, targetedTimestamp: numbe
         let projectedBlockNumber = curBlockNumber + diffInBlock;
         const projectedBlock = (await provider.getBlock(projectedBlockNumber))!;
         const projectedTimestamp = Number(projectedBlock.timestamp);
+
+        if (projectedTimestamp > targetedTimestamp) {
+            r = projectedBlockNumber;
+        } else {
+            l = projectedBlockNumber;
+        }
+
         curTimestamp = projectedTimestamp;
         curBlockNumber = projectedBlockNumber;
+    }
+
+    if (l == -1 || r == -1) {
+        throw new Error("getTargetedBlock: l, r = -1 after 20 iterations.");
+    }
+
+    // if at this stage, we still cannot find the targeted block, we can binary search
+    while (l + 1 < r) {
+        const mid = (l + r) >> 1;
+        const midBlock = (await provider.getBlock(mid))!;
+        const midTimestamp = Number(midBlock.timestamp);
+        if (midTimestamp > targetedTimestamp) {
+            r = mid;
+        } else {
+            l = mid;
+            curBlockNumber = mid;
+        }
     }
 
     return curBlockNumber;
